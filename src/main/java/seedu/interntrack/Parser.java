@@ -1,4 +1,5 @@
 package seedu.interntrack;
+
 import java.time.LocalDate;
 
 /**
@@ -44,6 +45,7 @@ public class Parser {
         }
         return new Application(company, role, deadline, contact);
     }
+
     /**
      * Parses the application index from an edit command.
      *

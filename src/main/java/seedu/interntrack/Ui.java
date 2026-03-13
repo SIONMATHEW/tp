@@ -60,6 +60,17 @@ public class Ui {
     }
 
     /**
+     * Prints confirmation after editing an application.
+     *
+     * @param application The updated application.
+     * @param index The index of the application.
+     */
+    public static void printEditApplication(Application application, int index) {
+        System.out.println("Nice! I've updated application " + index + ":");
+        System.out.println("  " + application.toString());
+    }
+
+    /**
      * Prints an error message when an unrecognised command is entered.
      */
     public static void printUnknownCommand() {
