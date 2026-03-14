@@ -31,13 +31,30 @@ public class Parser {
             String trimmed = part.trim();
             if (trimmed.startsWith("c/")) {
                 company = trimmed.substring(2).trim();
+                if (company.isEmpty()) {
+                    logger.log(Level.WARNING, "Company field is empty in input");
+                    throw new InternTrackException("Company name cannot be empty.");
+                }
             } else if (trimmed.startsWith("r/")) {
                 role = trimmed.substring(2).trim();
+                if (role.isEmpty()) {
+                    logger.log(Level.WARNING, "Role field is empty in input");
+                    throw new InternTrackException("Role name cannot be empty.");
+                }
             } else if (trimmed.startsWith("ct/")) {
                 contact = trimmed.substring(3).trim();
+                if (contact.isEmpty()) {
+                    logger.log(Level.WARNING, "Contact field is empty in input");
+                    throw new InternTrackException("Contact name cannot be empty.");
+                }
             } else if (trimmed.startsWith("d/")) {
+                String dateString = trimmed.substring(2).trim();
+                if (dateString.isEmpty()) {
+                    logger.log(Level.WARNING, "Deadline field is empty in input");
+                    throw new InternTrackException("Deadline date cannot be empty.");
+                }
                 try {
-                    deadline = LocalDate.parse(trimmed.substring(2).trim());
+                    deadline = LocalDate.parse(dateString.trim());
                 } catch (Exception e) {
                     logger.log(Level.WARNING, "Invalid date format in input: " + trimmed);
                     throw new InternTrackException(DATE_FORMAT_ERROR);
