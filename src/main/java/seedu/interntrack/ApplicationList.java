@@ -1,11 +1,14 @@
 package seedu.interntrack;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Manages the list of internship applications.
  */
 public class ApplicationList {
+    private static final Logger logger = Logger.getLogger("ApplicationList");
 
     /**
      * Adds a new application parsed from the given input line to the list.
@@ -18,7 +21,12 @@ public class ApplicationList {
     public static Application addApplications(ArrayList<Application> userApplications,
             String line) throws InternTrackException {
         Application newApplication = Parser.createApplication(line);
+        assert newApplication.getCompany() != null && !newApplication.getCompany().isEmpty() :
+            "Application company should be valid after creation";
+        assert newApplication.getRole() != null && !newApplication.getRole().isEmpty() :
+            "Application role should be valid after creation";
         userApplications.add(newApplication);
+        logger.log(Level.INFO, "Added new application to list. Total applications: " + userApplications.size());
         return newApplication;
     }
     /**

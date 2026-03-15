@@ -29,6 +29,8 @@ public class Application {
         this.deadline = deadline;
         this.contact = contact;
         this.status = DEFAULT_STATUS;
+        // Assertion to verify default status postcondition
+        assert this.status.equals("Pending") : "New applications must start with Pending status";
     }
 
     /**

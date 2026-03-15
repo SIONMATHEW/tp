@@ -1,6 +1,8 @@
 package seedu.interntrack;
 
 import java.time.LocalDate;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * Parses user input strings into Application objects.
@@ -11,6 +13,7 @@ public class Parser {
     private static final String DATE_FORMAT_ERROR = "Date must be in YYYY-MM-DD format.";
     private static final String STATUS_PREFIX = "s/";
     private static final String EDIT_FORMAT_ERROR = "Use format: edit INDEX s/NEW_STATUS";
+    private static final Logger logger = Logger.getLogger("Parser");
     /**
      * Creates an Application from a raw user input string.
      *
@@ -28,21 +31,44 @@ public class Parser {
             String trimmed = part.trim();
             if (trimmed.startsWith("c/")) {
                 company = trimmed.substring(2).trim();
+                if (company.isEmpty()) {
+                    logger.log(Level.WARNING, "Company field is empty in input");
+                    throw new InternTrackException("Company name cannot be empty.");
+                }
             } else if (trimmed.startsWith("r/")) {
                 role = trimmed.substring(2).trim();
+                if (role.isEmpty()) {
+                    logger.log(Level.WARNING, "Role field is empty in input");
+                    throw new InternTrackException("Role name cannot be empty.");
+                }
             } else if (trimmed.startsWith("ct/")) {
                 contact = trimmed.substring(3).trim();
+                if (contact.isEmpty()) {
+                    logger.log(Level.WARNING, "Contact field is empty in input");
+                    throw new InternTrackException("Contact name cannot be empty.");
+                }
             } else if (trimmed.startsWith("d/")) {
+                String dateString = trimmed.substring(2).trim();
+                if (dateString.isEmpty()) {
+                    logger.log(Level.WARNING, "Deadline field is empty in input");
+                    throw new InternTrackException("Deadline date cannot be empty.");
+                }
                 try {
-                    deadline = LocalDate.parse(trimmed.substring(2).trim());
+                    deadline = LocalDate.parse(dateString.trim());
                 } catch (Exception e) {
+                    logger.log(Level.WARNING, "Invalid date format in input: " + trimmed);
                     throw new InternTrackException(DATE_FORMAT_ERROR);
                 }
             }
         }
         if (company == null || role == null) {
+            logger.log(Level.WARNING, "Missing required fields in add command");
             throw new InternTrackException("Both company (c/) and role (r/) are required!");
         }
+        // Assertions to verify internal invariants after parsing
+        assert company != null && !company.isEmpty() : "Company name should have been captured";
+        assert role != null && !role.isEmpty() : "Role title should have been captured";
+        logger.log(Level.INFO, "Successfully parsed application: company=" + company + ", role=" + role);
         return new Application(company, role, deadline, contact);
     }
 
