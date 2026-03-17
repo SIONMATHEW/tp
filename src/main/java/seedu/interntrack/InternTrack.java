@@ -112,9 +112,6 @@ public class InternTrack {
     /**
      * Handles the edit command by updating an application's status.
      */
-    /**
-     * Handles the edit command by updating an application's status.
-     */
     private static void handleEditCommand(String line, ArrayList<Application> userApplications)
             throws InternTrackException {
         logger.info("Processing edit command: " + line);
