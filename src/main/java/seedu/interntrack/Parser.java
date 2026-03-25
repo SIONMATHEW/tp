@@ -213,14 +213,14 @@ public class Parser {
         //Extra flag
         boolean isDesc = false;
         boolean isNonnull = false;
-        for(String additional_criteria : criterias[1].split("\\s+")){
-            if (!additional_criteria.equals(SORT_FLAG1) && !additional_criteria.equals(SORT_FLAG2)) {
+        for(String criteria : criterias[1].split("\\s+")){
+            if (!criteria.equals(SORT_FLAG1) && !criteria.equals(SORT_FLAG2)) {
                 throw new InternTrackException("Wrong flag, use either these: DESC, NONNULL");
             }
-            if(additional_criteria.equals(SORT_FLAG1)){
+            if(criteria.equals(SORT_FLAG1)){
                 isDesc = true;
             }
-            if(additional_criteria.equals(SORT_FLAG2)){
+            if(criteria.equals(SORT_FLAG2)){
                 isNonnull = true;
             }
         }

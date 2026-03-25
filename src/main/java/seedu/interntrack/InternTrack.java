@@ -167,7 +167,7 @@ public class InternTrack {
 
         assert criteria.length > 0: "There must be some sorting criteria";
         assert criteria.length < 4: "There are at most 3 criteria";
-        ArrayList<Application> sortedApplications = ApplicationList.sortApplicationsByCriteria(userApplications, criteria);
-        Ui.printSortedApplications(sortedApplications, criteria);
+        ArrayList<Application> sortedApps = ApplicationList.sortApplicationsByCriteria(userApplications, criteria);
+        Ui.printSortedApplications(sortedApps, criteria);
     }
 }

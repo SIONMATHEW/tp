@@ -2,7 +2,6 @@ package seedu.interntrack;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 
