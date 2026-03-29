@@ -80,12 +80,9 @@ public class Ui {
         String role = app.getRole();
         String company = app.getCompany();
         String status = app.getStatus();
-        assert company != null && !company.isEmpty() :
-                "Existing application must have company";
-        assert role != null && !role.isEmpty() :
-                "Existing application must have role";
-        assert status != null :
-                "Existing application must have status";
+        assert company != null && !company.isEmpty() : "Existing application must have company";
+        assert role != null && !role.isEmpty() : "Existing application must have role";
+        assert status != null : "Existing application must have status";
         String deadline = (app.getDeadline() != null) ? " Apply by " + app.getDeadline().toString() + "." : "";
         String contact = (app.getContact() != null) ? " Contact with " + app.getContact() + "." : "";
         System.out.println((index + 1) + ". " + role + " at " + company + " is " + status + "." + deadline + contact);
@@ -112,20 +109,22 @@ public class Ui {
     }
 
     /**
-     * Prints applications filtered by the given status.
+     * Prints applications filtered by the given criterion.
      *
      * @param filteredApplications The filtered list to display.
-     * @param status               The status used for filtering.
+     * @param criteria             The criterion used for filtering.
      */
-    public static void printFilteredApplications(ArrayList<Application> filteredApplications, String status) {
+    public static void printFilteredApplications(ArrayList<Application> filteredApplications,
+            FilterCriteria criteria) {
+        String filterSummary = criteria.getSummary();
         if (filteredApplications.isEmpty()) {
-            System.out.println("No applications found with status: " + status + ".");
+            System.out.println("No applications found matching " + filterSummary + ".");
             return;
         }
         int applicationCount = filteredApplications.size();
         System.out.println("You have " + applicationCount
                 + ((applicationCount > 1) ? " applications" : " application")
-                + " with status " + status + ".");
+                + " matching " + filterSummary + ".");
         for (int i = 0; i < applicationCount; i++) {
             Application app = filteredApplications.get(i);
             printApplication(app, i);

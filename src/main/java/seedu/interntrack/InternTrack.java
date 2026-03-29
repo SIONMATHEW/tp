@@ -164,19 +164,13 @@ public class InternTrack {
         logger.info("Processing edit command: " + line);
 
         int index = Parser.parseEditIndex(line);
-        String status = Parser.parseEditStatus(line);
+        EditDetails editDetails = Parser.parseEditDetails(line);
 
-        assert !status.isBlank() : "Parsed status should not be blank";
-
-        logger.info("Editing application at index " + index + " with new status: " + status);
+        logger.info("Editing application at index " + index);
 
         saveStateForUndo(userApplications, undoHistory);
 
-        Application updatedApplication =
-                ApplicationList.editApplicationStatus(userApplications, index, status);
-
-        assert updatedApplication.getStatus().equals(status)
-                : "Application status should match edited status";
+        Application updatedApplication = ApplicationList.editApplication(userApplications, index, editDetails);
 
         Ui.printEditApplication(updatedApplication, index);
         Storage.saveApplications(userApplications);
@@ -189,10 +183,9 @@ public class InternTrack {
      */
     private static void handleFilterCommand(String line, ArrayList<Application> userApplications)
             throws InternTrackException {
-        String status = Parser.parseFilterStatus(line);
-        ArrayList<Application> filteredApplications =
-                ApplicationList.filterApplicationsByStatus(userApplications, status);
-        Ui.printFilteredApplications(filteredApplications, status);
+        FilterCriteria criteria = Parser.parseFilterCriteria(line);
+        ArrayList<Application> filteredApplications = ApplicationList.filterApplications(userApplications, criteria);
+        Ui.printFilteredApplications(filteredApplications, criteria);
     }
 
     /**

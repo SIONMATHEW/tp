@@ -92,6 +92,56 @@ public class Application {
     }
 
     /**
+     * Sets the company name of this application.
+     *
+     * @param company The updated company name.
+     */
+    public void setCompany(String company) {
+        if (company == null || company.trim().isEmpty()) {
+            throw new IllegalArgumentException("Company cannot be null or empty.");
+        }
+
+        this.company = company.trim();
+        assert !this.company.isBlank() : "Application company should not be blank after setting";
+    }
+
+    /**
+     * Sets the role name of this application.
+     *
+     * @param role The updated role name.
+     */
+    public void setRole(String role) {
+        if (role == null || role.trim().isEmpty()) {
+            throw new IllegalArgumentException("Role cannot be null or empty.");
+        }
+
+        this.role = role.trim();
+        assert !this.role.isBlank() : "Application role should not be blank after setting";
+    }
+
+    /**
+     * Sets the deadline of this application.
+     *
+     * @param deadline The updated deadline, or null if absent.
+     */
+    public void setDeadline(LocalDate deadline) {
+        this.deadline = deadline;
+    }
+
+    /**
+     * Sets the contact details of this application.
+     *
+     * @param contact The updated contact, or null if absent.
+     */
+    public void setContact(String contact) {
+        if (contact != null && contact.trim().isEmpty()) {
+            throw new IllegalArgumentException("Contact cannot be blank.");
+        }
+
+        this.contact = (contact == null) ? null : contact.trim();
+    }
+
+    /**
      * Sets the status of this application.
      *
      * @param status The new status value.
