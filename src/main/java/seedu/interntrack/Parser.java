@@ -15,7 +15,7 @@ public class Parser {
     private static final String ROLE_PREFIX = "r/";
     private static final String CONTACT_PREFIX = "ct/";
     private static final String DEADLINE_PREFIX = "d/";
-    public static final String REGEX = "(?=c/|r/|ct/|d/)";
+    private static final String REGEX = "(?=c/|r/|ct/|d/)";
     private static final String DATE_FORMAT_ERROR = "Date must be in YYYY-MM-DD format.";
     private static final String STATUS_PREFIX = "s/";
     private static final String SORT_PREFIX = "by/";
@@ -132,38 +132,38 @@ public class Parser {
 
         for (PrefixedValue field : fields) {
             switch (field.prefix) {
-                case COMPANY_PREFIX:
-                    if (company != null) {
-                        throw new InternTrackException(DUPLICATE_FIELD_ERROR);
-                    }
-                    company = parseRequiredTextValue(field.value, "Company name cannot be empty.");
-                    break;
-                case ROLE_PREFIX:
-                    if (role != null) {
-                        throw new InternTrackException(DUPLICATE_FIELD_ERROR);
-                    }
-                    role = parseRequiredTextValue(field.value, "Role name cannot be empty.");
-                    break;
-                case DEADLINE_PREFIX:
-                    if (deadline != null) {
-                        throw new InternTrackException(DUPLICATE_FIELD_ERROR);
-                    }
-                    deadline = parseDateValue(field.value);
-                    break;
-                case CONTACT_PREFIX:
-                    if (contact != null) {
-                        throw new InternTrackException(DUPLICATE_FIELD_ERROR);
-                    }
-                    contact = parseRequiredTextValue(field.value, "Contact name cannot be empty.");
-                    break;
-                case STATUS_PREFIX:
-                    if (status != null) {
-                        throw new InternTrackException(DUPLICATE_FIELD_ERROR);
-                    }
-                    status = parseRequiredTextValue(field.value, "Status cannot be empty.");
-                    break;
-                default:
-                    throw new InternTrackException(EDIT_FORMAT_ERROR);
+            case COMPANY_PREFIX:
+                if (company != null) {
+                    throw new InternTrackException(DUPLICATE_FIELD_ERROR);
+                }
+                company = parseRequiredTextValue(field.value, "Company name cannot be empty.");
+                break;
+            case ROLE_PREFIX:
+                if (role != null) {
+                    throw new InternTrackException(DUPLICATE_FIELD_ERROR);
+                }
+                role = parseRequiredTextValue(field.value, "Role name cannot be empty.");
+                break;
+            case DEADLINE_PREFIX:
+                if (deadline != null) {
+                    throw new InternTrackException(DUPLICATE_FIELD_ERROR);
+                }
+                deadline = parseDateValue(field.value);
+                break;
+            case CONTACT_PREFIX:
+                if (contact != null) {
+                    throw new InternTrackException(DUPLICATE_FIELD_ERROR);
+                }
+                contact = parseRequiredTextValue(field.value, "Contact name cannot be empty.");
+                break;
+            case STATUS_PREFIX:
+                if (status != null) {
+                    throw new InternTrackException(DUPLICATE_FIELD_ERROR);
+                }
+                status = parseRequiredTextValue(field.value, "Status cannot be empty.");
+                break;
+            default:
+                throw new InternTrackException(EDIT_FORMAT_ERROR);
             }
         }
 
@@ -196,16 +196,16 @@ public class Parser {
 
         PrefixedValue field = fields.get(0);
         return switch (field.prefix) {
-            case COMPANY_PREFIX -> FilterCriteria.forText(FilterCriteria.Field.COMPANY,
-                    parseRequiredTextValue(field.value, "Company name cannot be empty."));
-            case ROLE_PREFIX -> FilterCriteria.forText(FilterCriteria.Field.ROLE,
-                    parseRequiredTextValue(field.value, "Role name cannot be empty."));
-            case DEADLINE_PREFIX -> FilterCriteria.forDeadline(parseDateValue(field.value));
-            case CONTACT_PREFIX -> FilterCriteria.forText(FilterCriteria.Field.CONTACT,
-                    parseRequiredTextValue(field.value, "Contact name cannot be empty."));
-            case STATUS_PREFIX -> FilterCriteria.forText(FilterCriteria.Field.STATUS,
-                    parseRequiredTextValue(field.value, "Status cannot be empty."));
-            default -> throw new InternTrackException(FILTER_FORMAT_ERROR);
+        case COMPANY_PREFIX -> FilterCriteria.forText(FilterCriteria.Field.COMPANY,
+                parseRequiredTextValue(field.value, "Company name cannot be empty."));
+        case ROLE_PREFIX -> FilterCriteria.forText(FilterCriteria.Field.ROLE,
+                parseRequiredTextValue(field.value, "Role name cannot be empty."));
+        case DEADLINE_PREFIX -> FilterCriteria.forDeadline(parseDateValue(field.value));
+        case CONTACT_PREFIX -> FilterCriteria.forText(FilterCriteria.Field.CONTACT,
+                parseRequiredTextValue(field.value, "Contact name cannot be empty."));
+        case STATUS_PREFIX -> FilterCriteria.forText(FilterCriteria.Field.STATUS,
+                parseRequiredTextValue(field.value, "Status cannot be empty."));
+        default -> throw new InternTrackException(FILTER_FORMAT_ERROR);
         };
     }
 
