@@ -70,8 +70,6 @@ java -jar InternTrack.jar
 
 ---
 
----
-
 ## Design
 
 ### Architecture
