@@ -384,7 +384,8 @@ public class Parser {
 
         } catch (NumberFormatException e) {
             logger.warning("Invalid day format in remind command: " + daysString);
-            throw new InternTrackException("Days must be a valid number or small enough number. Use format: remind [DAYS]");
+            String errorMessage = "Days must be a valid number or small enough number. Use format: remind [DAYS]";
+            throw new InternTrackException(errorMessage);
         }
     }
 
