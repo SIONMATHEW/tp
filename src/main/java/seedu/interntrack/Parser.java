@@ -1,6 +1,8 @@
 package seedu.interntrack;
 
 import java.time.LocalDate;
+import java.time.YearMonth;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -419,7 +421,8 @@ public class Parser {
      *
      * @param value The raw date string.
      * @return The parsed LocalDate.
-     * @throws InternTrackException If the date is empty or not in YYYY-MM-DD format.
+     * @throws InternTrackException If the date is empty, not in YYYY-MM-DD format,
+     *         or logically invalid (e.g., Feb 29 on non-leap year).
      */
     private static LocalDate parseDateValue(String value) throws InternTrackException {
         String trimmedValue = value.trim();
@@ -430,10 +433,42 @@ public class Parser {
 
         try {
             return LocalDate.parse(trimmedValue);
-        } catch (Exception e) {
+        } catch (DateTimeParseException e) {
             logger.log(Level.WARNING, "Invalid date format in input: " + trimmedValue);
-            throw new InternTrackException(DATE_FORMAT_ERROR);
+            throw new InternTrackException(getDetailedErrorMessage(trimmedValue));
         }
+    }
+
+    /**
+     * Returns a detailed error message for invalid date inputs.
+     *
+     * @param trimmedValue The raw date string that failed to parse.
+     * @return A descriptive error message.
+     */ 
+    private static String getDetailedErrorMessage(String trimmedValue) {
+        String[] parts = trimmedValue.split("-");
+        if (parts.length != 3) {
+            return DATE_FORMAT_ERROR;
+        }
+
+        try {
+            int year = Integer.parseInt(parts[0]);
+            int month = Integer.parseInt(parts[1]);
+            int day = Integer.parseInt(parts[2]);
+
+            if (month < 1 || month > 12) {
+                return "Invalid month: " + month + ". Month must be between 1 and 12.";
+            }
+
+            int maxDays = YearMonth.of(year, month).lengthOfMonth();
+            if (day > maxDays) {
+                return "Invalid date: " + trimmedValue + " does not exist (this month has " + maxDays + " days).";
+            }
+        } catch (NumberFormatException ignored) {
+            // If parsing the components fails, fall back to generic error message
+        }
+
+        return DATE_FORMAT_ERROR;
     }
 
     /**
