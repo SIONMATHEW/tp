@@ -93,6 +93,7 @@ public class ApplicationList {
         }
         if (editDetails.getStatus() != null) {
             application.setStatus(editDetails.getStatus());
+
         }
 
         logger.info("Updated application at index " + index + ": " + application);

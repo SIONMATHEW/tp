@@ -180,7 +180,7 @@ Notes
 - You must provide at least one field to update.
 - Each field can only be supplied once in the same command.
 - The application index must be greater than 0.
-
+- For `s/STATUS`, some default statuses you can think of are `Applied`, `Pending`, `Accepted`, `Rejected` or you custom statuses you set.
 Example
 
 ```
@@ -251,6 +251,7 @@ Notes
 - The command accepts exactly one field per use.
 - Text matching for company, role, contact, and status is case-insensitive.
 - For `d/DEADLINE`, InternTrack shows applications with deadlines on or before the specified date.
+- For `s/STATUS`, some default statuses you can think of are `Applied`, `Pending`, `Accepted`, `Rejected` or you custom statuses you set.
 
 Examples
 
