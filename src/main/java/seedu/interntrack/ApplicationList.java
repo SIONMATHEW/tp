@@ -144,17 +144,20 @@ public class ApplicationList {
 
     /**
      * Filters applications whose deadlines are on or before the specified date.
+     * Excludes applications with past deadlines (before today).
      *
      * @param userApplications The list to filter.
      * @param deadline         The cutoff date for filtering.
-     * @return A list of applications with deadlines on or before the given date.
+     * @return A list of applications with deadlines on or after today and on or before the given date.
      */
     public static ArrayList<Application> filterApplicationsOnOrBefore(ArrayList<Application> userApplications,
                                                                       LocalDate deadline) {
         ArrayList<Application> filteredApplications = new ArrayList<>();
+        LocalDate today = LocalDate.now();
         for (Application application : userApplications) {
             LocalDate applicationDeadline = application.getDeadline();
-            if (!application.isArchived() && applicationDeadline != null && !applicationDeadline.isAfter(deadline)) {
+            if (!application.isArchived() && applicationDeadline != null 
+                    && applicationDeadline.compareTo(today) >= 0 && !applicationDeadline.isAfter(deadline)) {
                 filteredApplications.add(application);
             }
         }
