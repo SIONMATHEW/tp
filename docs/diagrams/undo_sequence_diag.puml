@@ -9,7 +9,8 @@ participant ":Ui" as Ui
 activate InternTrack
 
 InternTrack -> InternTrack : handleUndoCommand(userApplications, undoHistory)
-activate InternTrack
+
+InternTrack -> InternTrack : restorePreviousState(userApplications, undoHistory)
 
 InternTrack -> Storage : saveApplications(userApplications)
 activate Storage
@@ -21,7 +22,7 @@ activate Ui
 Ui --> InternTrack
 deactivate Ui
 
-deactivate InternTrack
 [<-- InternTrack
 deactivate InternTrack
+
 @enduml
