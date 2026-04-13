@@ -54,6 +54,11 @@ java -jar InternTrack.jar
 ### Important: Restricted Characters
 
 * The pipe character `|` is **not allowed** in any text input fields (company, role, contact, deadline). Using this character will result in an error message. Please use alternative characters such as `/`, `&`, or `-` instead.
+### Date Format Constraints
+
+- All dates must be in **YYYY-MM-DD** format (ISO-8601 standard). The date must be a valid calendar date.
+- Invalid dates such as `2025-13-45` (month 13 does not exist) or `2025-02-30` (February 30 does not exist) will be rejected with an error message.
+- **Past dates are allowed**: You can add or edit applications with deadlines in the past. This is intentional, as the application allows you to track historical applications. However, the `remind` command filters out past deadlines to focus on active opportunities.
 
 ---
 
@@ -83,6 +88,8 @@ Deadline format
 ```
 YYYY-MM-DD
 ```
+
+Constraints: Must be a valid calendar date. Past dates are allowed. Invalid dates (e.g., month 13, February 30) will be rejected.
 
 Examples
 
@@ -171,7 +178,7 @@ Parameters
 - `INDEX` : Index of the application shown in the list
 - `c/COMPANY` : Updated company name
 - `r/ROLE` : Updated role name
-- `d/DEADLINE` : Updated deadline in `YYYY-MM-DD` format
+- `d/DEADLINE` : Updated deadline in `YYYY-MM-DD` format. Must be a valid calendar date. Past dates are allowed.
 - `ct/CONTACT` : Updated recruiter or HR contact
 - `s/STATUS` : Updated status value
 
@@ -250,7 +257,7 @@ Notes
 
 - The command accepts exactly one field per use.
 - Text matching for company, role, contact, and status is case-insensitive and matches substrings.
-- For `d/DEADLINE`, InternTrack shows applications with deadlines on or before the specified date.
+- For `d/DEADLINE`, the filter must be in `YYYY-MM-DD` format and must be a valid calendar date. InternTrack shows applications with deadlines on or before the specified date. This filter accepts both past and future deadlines.
 - For `s/STATUS`, some default statuses you can think of are `Applied`, `Pending`, `Accepted`, `Rejected` or you custom statuses you set.
 
 Examples
