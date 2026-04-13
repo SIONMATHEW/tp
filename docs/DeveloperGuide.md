@@ -250,8 +250,7 @@ Once the application is running and the user performs an action that modifies th
    - On successful write, an informational log message is recorded
 
 The following sequence diagram illustrates the save operation:
-
-![saveApplications_sequence-saveApplications_Sequence_Diagram.png](diagrams/saveApplications_sequence-saveApplications_Sequence_Diagram.png)
+![save_sequence_diag.png](diagrams/save_sequence_diag.png)
 
 By saving immediately after every modifying operation, the application guarantees that the on-disk state always matches the in-memory state, preventing data loss in the event of a crash or unexpected termination.
 
