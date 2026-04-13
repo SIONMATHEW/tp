@@ -229,13 +229,15 @@ public class ParserTest {
     @Test
     public void parseRemindDays_nonIntegerInput_throwsException() {
         String input = "remind abc";
-        verifyRemindExceptionThrown(input, "Days must be a valid number. Use format: remind [DAYS]");
+        String error = "Days must be a valid number or small enough number. Use format: remind [DAYS]";
+        verifyRemindExceptionThrown(input, error);
     }
 
     @Test
     public void parseRemindDays_decimalNumber_throwsException() {
         String input = "remind 3.5";
-        verifyRemindExceptionThrown(input, "Days must be a valid number. Use format: remind [DAYS]");
+        String error = "Days must be a valid number or small enough number. Use format: remind [DAYS]";
+        verifyRemindExceptionThrown(input, error);
     }
 
     @Test
@@ -248,7 +250,8 @@ public class ParserTest {
     @Test
     public void parseRemindDays_specialCharacters_throwsException() {
         String input = "remind @5";
-        verifyRemindExceptionThrown(input, "Days must be a valid number. Use format: remind [DAYS]");
+        String error = "Days must be a valid number or small enough number. Use format: remind [DAYS]";
+        verifyRemindExceptionThrown(input, error);
     }
 
 

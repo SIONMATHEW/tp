@@ -251,7 +251,9 @@ You have 2 applications matching status Pending.
 
 ## 6. View applications with upcoming deadlines: `remind`
 
-Shows applications with deadlines within the next N days.
+Shows applications with deadlines within the next N days. 
+
+It will throw error if the day specified is invalid(negative, not integer) or too big(more than 32 bits).
 
 Format
 
@@ -342,7 +344,7 @@ Sort applications by deadline in descending order.
 
 ## 8. Undo the most recent change: `undo`
 
-Reverts the most recent modifying command.
+Reverts the most recent modifying command. If previous there is no supported commands for undo, it will do nothing.
 
 Supported commands
 
