@@ -6,19 +6,19 @@
 2. [Quick Start](#quick-start)
 3. [Features](#features)
 4. [Commands](#commands)
-   - [1. Add a new internship application: `add`](#1-add-a-new-internship-application-add)
-   - [2. List all applications: `list`](#2-list-all-applications-list)
-   - [3. Edit an application: `edit`](#3-edit-an-application-edit)
-   - [4. Delete an application: `delete`](#4-delete-an-application-delete)
-   - [5. Filter applications: `filter`](#5-filter-applications-filter)
-   - [6. View applications with upcoming deadlines: `remind`](#6-view-applications-with-upcoming-deadlines-remind)
-   - [7. Sort applications: `sort`](#7-sort-applications-sort)
-   - [8. Undo the most recent change: `undo`](#8-undo-the-most-recent-change-undo)
-   - [9. Get summary: `summary`](#9-get-summary-summary)
-   - [10. Archive an application: `archive`](#10-archive-an-application-archive)
-   - [11. Restore an archived application: `unarchive`](#11-restore-an-archived-application-unarchive)
-   - [12. View archived applications: `listarchived`](#12-view-archived-applications-listarchived)
-   - [13. Exit the application: `bye`](#13-exit-the-application-bye)
+    - [1. Add a new internship application: `add`](#1-add-a-new-internship-application-add)
+    - [2. List all applications: `list`](#2-list-all-applications-list)
+    - [3. Edit an application: `edit`](#3-edit-an-application-edit)
+    - [4. Delete an application: `delete`](#4-delete-an-application-delete)
+    - [5. Filter applications: `filter`](#5-filter-applications-filter)
+    - [6. View applications with upcoming deadlines: `remind`](#6-view-applications-with-upcoming-deadlines-remind)
+    - [7. Sort applications: `sort`](#7-sort-applications-sort)
+    - [8. Undo the most recent change: `undo`](#8-undo-the-most-recent-change-undo)
+    - [9. Get summary: `summary`](#9-get-summary-summary)
+    - [10. Archive an application: `archive`](#10-archive-an-application-archive)
+    - [11. Restore an archived application: `unarchive`](#11-restore-an-archived-application-unarchive)
+    - [12. View archived applications: `listarchived`](#12-view-archived-applications-listarchived)
+    - [13. Exit the application: `bye`](#13-exit-the-application-bye)
 5. [FAQ](#faq)
 6. [Command Summary](#command-summary)
 
@@ -60,10 +60,10 @@ InternTrack enforces strict command formats for certain commands such as `archiv
 
 - Extra unexpected text after a valid command will result in an error.
 - For example:
-   - `archive 1` is valid
-   - `archive 1 extra` is invalid
+    - `archive 1` is valid
+    - `archive 1 extra` is invalid
 - However, additional spaces are allowed:
-   - `archive    1` is valid
+    - `archive    1` is valid
 
 ### Important: Restricted Characters
 
@@ -156,6 +156,11 @@ InternTrack automatically detects and prevents duplicate applications from being
 - **Contact**: Contact person is treated as a metadata attribute of an application, not a duplicate criterion. Different recruiters at the same company for the same role represent the same application position, not separate opportunities.
 - **Status**: Status is never checked for duplicates since all new applications automatically start as "Pending"
 
+**Important Note on Archived Applications:**
+- Duplicate detection scans your **entire tracker**, including
+  both active and archived applications.
+- You cannot add a new application if an identical one is hidden in your archive. If your `add` command is rejected as a duplicate but you don't see it in your active list, use the `listarchived` command to locate it.
+
 **Examples of Duplicate Detection:**
 
 | Scenario | First Application | Second Application | Result    |
@@ -232,6 +237,9 @@ Notes
 - For `s/STATUS`, some default statuses you can think of are `Applied`, `Pending`, `Accepted`, `Rejected` or the custom statuses you set.
 - The `INDEX` refers to the position shown in the **active applications list (`list`)**, not the full internal list.
 - Archived applications cannot be edited directly. You must first unarchive them.
+- **Duplicate Protection:** The `edit` command strictly follows
+  the exact same duplicate detection rules as the `add` command. If your proposed edits would cause the application to become a duplicate
+  of another existing application (including archived ones), the edit will be safely blocked to protect your data integrity.
 ```
 edit 2 s/Accepted
 ```
@@ -285,9 +293,9 @@ Noted. I've removed this application.
 - The `delete` command can only remove **active applications**.
 - Archived applications are not affected by `delete`.
 - To delete an archived application:
-   1. Use `listarchived` to locate it
-   2. Use `unarchive INDEX`
-   3. Then use `delete INDEX` from the active list
+    1. Use `listarchived` to locate it
+    2. Use `unarchive INDEX`
+    3. Then use `delete INDEX` from the active list
 
 ---
 
@@ -309,10 +317,13 @@ Notes
 
 - The command accepts exactly one field per use.
 - Text matching for company, role, contact, and status is case-insensitive and matches substrings.
-- For `d/DEADLINE`, the filter must be in `YYYY-MM-DD` format and must be a valid calendar date. InternTrack shows applications with deadlines on or before the specified date. This filter accepts both past and future deadlines.
-- For `s/STATUS`, some default statuses you can think of are `Applied`, `Pending`, `Accepted`, `Rejected` or you custom statuses you set.
+- For `d/DEADLINE`, InternTrack shows applications with deadlines on or before the specified date.
+- For `s/STATUS`, some default statuses you can think of are `Applied`, `Pending`, `Accepted`, `Rejected` or the custom statuses you set.
+- **Persistent Indexing:** The numbers shown next to the filtered applications represent their actual index
+  in the main active `list`. You do not need to type `list` again; you can immediately use the displayed number
+  for your `edit`, `delete`, or `archive` commands.
 
-Examples
+Examples:
 
 ```
 filter s/Pending
@@ -336,8 +347,8 @@ Example output
 
 ```
 You have 2 applications matching status Pending.
-1. Backend Intern at Shopee is Pending. Apply by 2026-04-03.
-2. SWE Intern at Google is Pending.
+2. Backend Intern at Shopee is Pending. Apply by 2026-04-03.
+5. SWE Intern at Google is Pending.
 ```
 
 ---
@@ -379,7 +390,7 @@ Example output
 ```
 You have 2 applications due in the next 3 days (up to 2026-04-04).
 1. Software Engineer at Google is Pending. Apply by 2026-04-03.
-2. Data Analyst at Microsoft is Pending. Apply by 2026-04-02.
+4. Data Analyst at Microsoft is Pending. Apply by 2026-04-02.
 ```
 
 If there are no applications with upcoming deadlines:
@@ -422,6 +433,9 @@ Optional flags
 
 - `DESC` : Sort in descending order
 - `NONNULL` : Exclude entries where the chosen field is null
+
+Notes
+- **Persistent Indexing:** Even though the visual order of the applications changes on your screen, the index numbers printed next to each application remain tied to their original position in the main active list. You can safely use these exact numbers to `edit` or `delete` them without needing to run `list` again.
 
 Examples
 
@@ -514,9 +528,9 @@ ____________________________________________________________
 ### Important Notes on Summary
 
 - The summary includes:
-   - Total number of applications (active + archived)
-   - Number of active applications
-   - Number of archived applications
+    - Total number of applications (active + archived)
+    - Number of active applications
+    - Number of archived applications
 - The **Status Overview** and **Upcoming Deadlines** sections consider **only active applications**.
 - Archived applications are excluded from deadline tracking and status summaries.
 
@@ -569,23 +583,23 @@ Nice! I've archived application 2:
 
 Restores an archived application back to its active state.
 
- Format
+Format
 
 ```
 unarchive INDEX
 ```
- 
+
 Parameters
 
 - `INDEX` : Index of the application in the list
 
- Example
+Example
 
 ```
 unarchive 2
 ```
 
- Result
+Result
 
 Restores application 2.
 
@@ -596,7 +610,7 @@ Nice! I've restored application 2:
 Meta - Data Analyst (Deadline: 2026-05-25, Contact: Bob, Status: Pending)
 ```
 
- Notes
+Notes
 
 - The application index must be greater than 0.
 - The application must exist in the list.
@@ -610,19 +624,19 @@ Meta - Data Analyst (Deadline: 2026-05-25, Contact: Bob, Status: Pending)
 
 Displays all archived applications currently stored in the tracker.
 
- Format
+Format
 
 ```
 listarchived
 ```
 
- Example
+Example
 
 ```
 listarchived
 ```
 
- Result
+Result
 
 Shows all archived applications.
 

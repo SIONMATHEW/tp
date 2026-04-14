@@ -66,15 +66,15 @@ You have applied for 3 roles
 ____________________________________________________________
 ____________________________________________________________
 You have 1 application matching role Teaching Assistant.
-1. Teaching Assistant at NUS School of Computing is Applied. Contact with Prof Xavier.
+2. Teaching Assistant at NUS School of Computing is Applied. Contact with Prof Xavier.
 ____________________________________________________________
 ____________________________________________________________
 You have 1 application matching company cro.
-1. Embedded at Micron is Pending. Apply by 2027-01-01.
+3. Embedded at Micron is Pending. Apply by 2027-01-01.
 ____________________________________________________________
 ____________________________________________________________
 You have 1 application matching contact Prof Xavier.
-1. Teaching Assistant at NUS School of Computing is Applied. Contact with Prof Xavier.
+2. Teaching Assistant at NUS School of Computing is Applied. Contact with Prof Xavier.
 ____________________________________________________________
 ____________________________________________________________
 You have 1 application matching deadline on or before 2025-01-01.
@@ -83,7 +83,7 @@ ____________________________________________________________
 ____________________________________________________________
 You have 2 applications matching status Pending.
 1. Backend Intern at Shopee is Pending. Apply by 2024-12-31. Contact with Johns.
-2. Embedded at Micron is Pending. Apply by 2027-01-01.
+3. Embedded at Micron is Pending. Apply by 2027-01-01.
 ____________________________________________________________
 ____________________________________________________________
 No applications found matching company Ghosted.
@@ -93,7 +93,7 @@ Filter command accepts exactly one field.
 ____________________________________________________________
 ____________________________________________________________
 Noted. I've removed this application:
-  2. Shopee - Backend Intern (Deadline: 2024-12-31, Contact: Johns, Status: Pending)
+  1. Shopee - Backend Intern (Deadline: 2024-12-31, Contact: Johns, Status: Pending)
 ____________________________________________________________
 ____________________________________________________________
 Got it. I've added this application:
@@ -125,7 +125,7 @@ You have applied for 6 roles
 6. Marketing at Micron is Pending. Contact with Limux.
 ____________________________________________________________
 ____________________________________________________________
-Wrong sort criteria, use either these: ROLE, COMPANY, DEADLINE, CONTACT
+Wrong sort criteria, use either these: ROLE, COMPANY, DEADLINE, CONTACT, STATUS
 ____________________________________________________________
 ____________________________________________________________
 Wrong flag, use either these: DESC, NONNULL
@@ -133,25 +133,25 @@ ____________________________________________________________
 ____________________________________________________________
 The application list has been sorted by role in descending order.
 1. Teaching Assistant at NUS School of Computing is Applied. Contact with Prof Xavier.
-2. SE at ShopBack is Pending. Apply by 2025-11-11. Contact with Harim.
-3. Sales at Shopee is Pending. Apply by 2030-10-23. Contact with Prof Y.
-4. Marketing at Micron is Pending. Contact with Limux.
-5. HE at NVIDIA is Pending. Apply by 2026-03-27. Contact with Prof X.
-6. Embedded at Micron is Pending. Apply by 2027-01-01.
+3. SE at ShopBack is Pending. Apply by 2025-11-11. Contact with Harim.
+5. Sales at Shopee is Pending. Apply by 2030-10-23. Contact with Prof Y.
+6. Marketing at Micron is Pending. Contact with Limux.
+4. HE at NVIDIA is Pending. Apply by 2026-03-27. Contact with Prof X.
+2. Embedded at Micron is Pending. Apply by 2027-01-01.
 ____________________________________________________________
 ____________________________________________________________
 The application list has been sorted by deadline in descending order with null entries removed.
-1. Sales at Shopee is Pending. Apply by 2030-10-23. Contact with Prof Y.
+5. Sales at Shopee is Pending. Apply by 2030-10-23. Contact with Prof Y.
 2. Embedded at Micron is Pending. Apply by 2027-01-01.
-3. HE at NVIDIA is Pending. Apply by 2026-03-27. Contact with Prof X.
-4. SE at ShopBack is Pending. Apply by 2025-11-11. Contact with Harim.
+4. HE at NVIDIA is Pending. Apply by 2026-03-27. Contact with Prof X.
+3. SE at ShopBack is Pending. Apply by 2025-11-11. Contact with Harim.
 ____________________________________________________________
 ____________________________________________________________
 The application list has been sorted by contact in ascending order with null entries removed.
-1. SE at ShopBack is Pending. Apply by 2025-11-11. Contact with Harim.
-2. Marketing at Micron is Pending. Contact with Limux.
-3. HE at NVIDIA is Pending. Apply by 2026-03-27. Contact with Prof X.
-4. Teaching Assistant at NUS School of Computing is Applied. Contact with Prof Xavier.
+3. SE at ShopBack is Pending. Apply by 2025-11-11. Contact with Harim.
+6. Marketing at Micron is Pending. Contact with Limux.
+4. HE at NVIDIA is Pending. Apply by 2026-03-27. Contact with Prof X.
+1. Teaching Assistant at NUS School of Computing is Applied. Contact with Prof Xavier.
 5. Sales at Shopee is Pending. Apply by 2030-10-23. Contact with Prof Y.
 ____________________________________________________________
 ____________________________________________________________
